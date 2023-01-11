@@ -9,7 +9,7 @@ from .analysis import member_engagement_score, age_group_count, age_group_percen
 # Create your views here.
 
 
-#@login_required(login_url='signin')
+@login_required(login_url='signin')
 def index(request):
     user_object = User.objects.get(username=request.user.username)
     user_profile = Profile.objects.get(user=user_object)
