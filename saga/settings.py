@@ -21,10 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['secret_key']
+# SECRET_KEY = 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj'
+
+SECRET_KEY = os.environ.get(
+    'secret_key', 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ['debug']
+DEBUG = False
 
 if not DEBUG:
     CSRF_TRUSTED_ORIGINS = ['https://web-production-a66e.up.railway.app/']
@@ -57,6 +60,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'saga.urls'
+
+CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_SECURE = True
+
+SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
