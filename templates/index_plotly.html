@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="favicon.png" rel="icon" type="image/png">
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+</head>
+
+<body>
+    <p>This is your profile picture</p>
+    <img src="{{user_profile.profileimg.url}}" class="header-avatar" alt="">
+    <p>You are logged in as: {{user_profile.user}}</p>
+    <p>{{user_profile.location}}</p>
+    <p>{{member_object.name}}</p>
+    <p>{{member_object.phone}}</p>
+
+    <div>
+        {{member_engagement_chart | safe}}
+    </div>
+
+    <div>
+        {{age_group_chart | safe}}
+    </div>
+
+    <div>
+        {{age_group_percent_chart | safe}}
+    </div>
+
+    <p>Nye medlemmer seneste 7 dage: {{new_members_seven}}</p>
+    <p>Nye medlemmer seneste 30 dage: {{new_members_thirty}}</p>
+
+    <div>
+        {{regional_distribution_chart | safe}}
+    </div>
+</body>
+
+</html>
