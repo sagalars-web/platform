@@ -78,11 +78,11 @@ WSGI_APPLICATION = 'saga.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sagaverse',
-        'USER': 'postgres',
-        'PASSWORD': 'Qwerty123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
