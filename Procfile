@@ -1,2 +1,1 @@
-web: gunicorn
-reportersprj.wsgi --log-file -
+web: python manage.py migrate && gunicorn saga.wsgi
