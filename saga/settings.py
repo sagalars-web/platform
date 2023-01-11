@@ -62,11 +62,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'saga.urls'
 
-CSRF_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
 
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 
-SECURE_SSL_REDIRECT = True
+#SECURE_SSL_REDIRECT = True
 
 TEMPLATES = [
     {
@@ -137,11 +137,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
-# Før
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
+# Før
+#STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Før
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+#STATICFILES_DIRS = BASE_DIR / "static"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -150,4 +153,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
