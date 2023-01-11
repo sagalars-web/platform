@@ -1,1 +1,2 @@
-web: gunicorn saga.wsgi --log-file -
+web: gunicorn
+reportersprj.wsgi --log-file -
