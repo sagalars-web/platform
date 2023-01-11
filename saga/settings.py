@@ -21,11 +21,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj'
-
+SECRET_KEY = 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj'
+'''
 SECRET_KEY = os.environ.get(
     'secret_key', 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj')
-
+'''
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
@@ -62,7 +62,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'saga.urls'
 
-CSRF_COOKIE_SECURE = True
+#CSRF_COOKIE_SECURE = True
 
 #SESSION_COOKIE_SECURE = True
 
