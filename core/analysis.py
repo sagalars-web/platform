@@ -79,7 +79,7 @@ def age_group_count():
 
     year = int(datetime.date.today().year)
 
-    df['age'] = df['birth_year'].apply(lambda x: year - x)
+    df['age'] = df['Birth_year'].apply(lambda x: year - x)
 
     intervals = [[0, 15], [16, 20], [21, 25], [26, 30],
                  [31, 35], [36, 100]]
