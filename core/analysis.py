@@ -74,7 +74,7 @@ def age_group_count():
     df = pd.DataFrame()
 
     for member in member_object:
-        new_row = {'birth_year': member.Birth_year}
+        new_row = {'Birth_year': member.Birth_year}
         df = df.append(new_row, ignore_index=True)
 
     year = int(datetime.date.today().year)
