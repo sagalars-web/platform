@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get(
     'secret_key', 'a@6^$6ot3-6g89asezp-6=v#f2z0(rh_&$d65h=plo!mrc*_lj')
 '''
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app']
 
