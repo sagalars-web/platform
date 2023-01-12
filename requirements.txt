@@ -12,7 +12,9 @@ gunicorn==20.1.0
 ipython==8.8.0
 jedi==0.18.2
 matplotlib-inline==0.1.6
+npm==0.1.1
 numpy==1.24.1
+optional-django==0.1.0
 pandas==1.5.2
 parso==0.8.3
 pickleshare==0.7.5
