@@ -38,7 +38,7 @@ class Member(models.Model):
     
     name = models.CharField(max_length=50, default='john')
     phone = models.IntegerField(default=22222222)
-    creation_date = models.DateField()
+    creation_date = models.DateField(default=datetime.date.today)
     email = models.EmailField(default='john@g.com')
     key_issue = models.CharField(max_length=2000, default='Det her betyder noget for mig')
     Birth_year = models.IntegerField(default=1994)
