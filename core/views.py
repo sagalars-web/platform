@@ -17,23 +17,17 @@ def index(request):
     #member_object = Member.objects.get(name='Lars Lohmann')
     member_object = Member.objects.all()
 
-    #age_groups, _, _ = age_group_count()
+    age_groups, _, _ = age_group_count()
 
-    context = {
-        
-    }
-
-    '''
     context = {'user_profile': user_profile,
                'member_object': member_object,
                'member_engagement_chart': member_engagement_score(),
                'age_group_chart': age_groups,
                'age_group_percent_chart': age_group_percent(),
-               'new_members_seven':new_members_time_interval(7),
+               'new_members_seven': new_members_time_interval(7),
                'new_members_thirty': new_members_time_interval(30),
                'regional_distribution_chart': regional_distribution()
                }
-    '''
 
     return render(request, 'index.html', context)
 

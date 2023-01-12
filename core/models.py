@@ -43,7 +43,7 @@ class Member(models.Model):
     email = models.EmailField(default='john@g.com')
     key_issue = models.CharField(
         max_length=2000, default='Det her betyder noget for mig')
-    Birth_year = models.IntegerField(default=1994)
+    birth_year = models.IntegerField(default=1994)
     zip_code = models.IntegerField(default=2100)
     engagement_score = models.IntegerField(default=100)
 
