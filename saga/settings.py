@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'django_crontab',
     'core'
 ]
 
@@ -154,7 +153,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
-
-CRONJOBS = [
-    ('* * * * *', 'saga.cron.my_cron_job')
-]
