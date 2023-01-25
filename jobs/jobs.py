@@ -9,11 +9,11 @@ import time
 def establish_db_connection():
 
     conn = psycopg2.connect(
-        host="containers-us-west-187.railway.app",
+        host="containers-us-west-155.railway.app",
         database="railway",
         user="postgres",
-        password="o7ldiAqCKY1MPF6bRxEu",
-        port="7900"
+        password="o9zCnb8ShgWzveon5doB",
+        port="7668"
     )
 
     cursor = conn.cursor()
