@@ -36,16 +36,16 @@ class Post(models.Model):
 
 
 class Member(models.Model):
-
     name = models.CharField(max_length=50, default='john')
     phone = models.IntegerField(default=22222222)
     creation_date = models.DateField(default=datetime.today)
     email = models.EmailField(default='john@g.com')
     key_issue = models.CharField(
-        max_length=2000, default='Det her betyder noget for mig')
+        max_length=10000, default='Det her betyder noget for mig')
     birth_year = models.IntegerField(default=1994)
     zip_code = models.IntegerField(default=2100)
     engagement_score = models.IntegerField(default=100)
+    auto_id = models.CharField(max_length=100, default="id")
 
     def __str__(self):
         return self.name
