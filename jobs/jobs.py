@@ -5,6 +5,7 @@ from urllib.request import Request, urlopen
 import psycopg2
 import time
 
+
 def establish_db_connection():
 
     conn = psycopg2.connect(
@@ -21,11 +22,11 @@ def establish_db_connection():
 
     return conn, cursor
 
+
 def track_exists(cursor, _id):
-    cursor.execute("SELECT auto_id FROM core_member WHERE auto_id = %s", (_id,))
+    cursor.execute(
+        "SELECT auto_id FROM core_member WHERE auto_id = %s", (_id,))
     return cursor.fetchone() is not None
-
-
 
 
 def schedule_api():
@@ -33,9 +34,9 @@ def schedule_api():
     i = 0
 
     conn, cursor = establish_db_connection()
-    
+
     headers = {
-    'autopilotapikey': '31f9fda3f63c4e5891904da0619c6d22'
+        'autopilotapikey': '31f9fda3f63c4e5891904da0619c6d22'
     }
 
     bookmark = ''
@@ -43,8 +44,9 @@ def schedule_api():
     flag = True
 
     while flag:
-        
-        request = Request('https://api2.autopilothq.com/v1/contacts' + bookmark, headers=headers)
+
+        request = Request(
+            'https://api2.autopilothq.com/v1/contacts' + bookmark, headers=headers)
 
         response_body = urlopen(request).read()
 
@@ -81,7 +83,7 @@ def schedule_api():
             except:
                 print('no zip code')
                 postnummer = 0000
-            
+
             print('Member: ', i)
             i += 1
             creation_date = contact['created_at']
@@ -97,32 +99,31 @@ def schedule_api():
                 continue
 
             values = (name, phone, creation_date,
-            email, mærkesag, fødselsår,
-            postnummer, engagement, _id)
+                      email, mærkesag, fødselsår,
+                      postnummer, engagement, _id)
 
             members.append(values)
 
-        try: 
+        try:
             bookmark = '/' + data['bookmark']
             print(bookmark)
         except:
             flag = False
-            
+
         if len(members) > 0:
-            cursor.executemany("INSERT INTO core_member (name, phone, creation_date, email, key_issue, birth_year, zip_code, engagement_score, auto_id) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", members)
+            cursor.executemany(
+                "INSERT INTO core_member (name, phone, creation_date, email, key_issue, birth_year, zip_code, engagement_score, auto_id) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)", members)
             #cursor.execute("INSERT INTO core_member (name, phone, creation_date, email, key_issue, birth_year, zip_code, engagement_score) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)",(name, phone, creation_date, email, mærkesag, fødselsår, postnummer, engagement))
             conn.commit()
 
-        #Tilføj over tid når vi er mere skarpe på sikkerheden
+        # Tilføj over tid når vi er mere skarpe på sikkerheden
         #navn = contact['FirstName']
         #email = contact['Email']
-        
 
     cursor.close()
     conn.close()
 
-    
     i = 0
     i += 1
-    
+
     print('This code is running...', i)
