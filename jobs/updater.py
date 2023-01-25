@@ -4,5 +4,5 @@ from .jobs import schedule_api
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(schedule_api, 'interval', seconds=86400)
+    scheduler.add_job(schedule_api, 'cron', hour=23)
     scheduler.start()
