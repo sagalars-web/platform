@@ -4,16 +4,20 @@ import random
 from urllib.request import Request, urlopen
 import psycopg2
 import time
+from dotenv.main import load_dotenv
+import os
+
+load_dotenv()
 
 
 def establish_db_connection():
 
     conn = psycopg2.connect(
-        host="containers-us-west-155.railway.app",
-        database="railway",
-        user="postgres",
-        password="o9zCnb8ShgWzveon5doB",
-        port="7668"
+        host=os.environ['DB_HOST'],
+        database=os.environ['DB_NAME'],
+        user=os.environ['DB_USER'],
+        password=os.environ['DB_PASS'],
+        port=os.environ['DB_PORT']
     )
 
     cursor = conn.cursor()
@@ -36,7 +40,7 @@ def schedule_api():
     conn, cursor = establish_db_connection()
 
     headers = {
-        'autopilotapikey': '31f9fda3f63c4e5891904da0619c6d22'
+        'autopilotapikey': os.environ['AUTO_KEY']
     }
 
     bookmark = ''

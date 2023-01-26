@@ -8,6 +8,10 @@ from core.models import Member
 import plotly.express as px
 import pandas as pd
 import datetime
+from dotenv.main import load_dotenv
+import os
+
+load_dotenv()
 
 class helper():
     def columns_from_database(list_of_columns):
@@ -55,11 +59,11 @@ class helper():
     def establish_db_connection():
 
         conn = psycopg2.connect(
-            host="containers-us-west-155.railway.app",
-            database="railway",
-            user="postgres",
-            password="o9zCnb8ShgWzveon5doB",
-            port="7668"
+            host=os.environ['DB_HOST'],
+            database=os.environ['DB_NAME'],
+            user=os.environ['DB_USER'],
+            password=os.environ['DB_PASS'],
+            port=os.environ['DB_PORT']
         )
 
         cursor = conn.cursor()
