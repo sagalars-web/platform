@@ -8,10 +8,14 @@ from core.models import Member
 import plotly.express as px
 import pandas as pd
 import datetime
-from dotenv.main import load_dotenv
+from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-load_dotenv()
+dotenv_path = Path('saga/saga/vars.env')
+
+load_dotenv(dotenv_path=dotenv_path)
+
 
 class helper():
     def columns_from_database(list_of_columns):
@@ -59,11 +63,11 @@ class helper():
     def establish_db_connection():
 
         conn = psycopg2.connect(
-            host=os.environ['DB_HOST'],
-            database=os.environ['DB_NAME'],
-            user=os.environ['DB_USER'],
-            password=os.environ['DB_PASS'],
-            port=os.environ['DB_PORT']
+            host=os.getenv('DBHOST'),
+            database=os.getenv('DBNAME'),
+            user=os.getenv('DBUSER'),
+            password=os.getenv('DBPASS'),
+            port=os.getenv('DBPORT')
         )
 
         cursor = conn.cursor()
@@ -71,6 +75,7 @@ class helper():
         print('connection established')
 
         return conn, cursor
+
 
 def member_engagement_score():
 
@@ -89,6 +94,7 @@ def member_engagement_score():
     chart = fig.to_html()
 
     return chart
+
 
 def age_group_count():
 
@@ -116,18 +122,19 @@ def age_group_count():
 
     values = list(interval_dict.values())
 
-    values.insert(0,datetime.date.today())
+    values.insert(0, datetime.date.today())
 
     values = tuple(values)
 
     conn, cursor = helper.establish_db_connection()
 
     cursor.execute(
-                "INSERT INTO age_group_count (date, zero_to_fifteen, sixteen_to_twenty, twentyone_to_twentyfive, twentysix_to_thirty,thirty_to_thirtyfive, thirtyfive_plus) VALUES(%s, %s, %s, %s, %s, %s, %s)", values)
+        "INSERT INTO age_group_count (date, zero_to_fifteen, sixteen_to_twenty, twentyone_to_twentyfive, twentysix_to_thirty,thirty_to_thirtyfive, thirtyfive_plus) VALUES(%s, %s, %s, %s, %s, %s, %s)", values)
     conn.commit()
 
     cursor.close()
     conn.close()
+
 
 def regional_distribution():
     member_object = Member.objects.all()
@@ -141,32 +148,29 @@ def regional_distribution():
     df['region'] = df['zip_code'].apply(lambda x: helper.zip_to_region(x))
 
     regions = ['Hovedstaden',
-                'Midtjylland',
-                'Fyn',
-                'Sjælland, LF, Møn',
-                'Nordsjælland',
-                'Nordjylland',
-                'Sønderjylland',
-                'ukendt',
-                'Grønland',
-                'Færøerne']
+               'Midtjylland',
+               'Fyn',
+               'Sjælland, LF, Møn',
+               'Nordsjælland',
+               'Nordjylland',
+               'Sønderjylland',
+               'ukendt',
+               'Grønland',
+               'Færøerne']
     antal = []
 
     for region in regions:
         antal.append(len(df[df['region'] == region]))
 
-    antal.insert(0,str(datetime.date.today()))
+    antal.insert(0, str(datetime.date.today()))
 
     final = tuple(antal)
 
     conn, cursor = helper.establish_db_connection()
 
     cursor.execute(
-                "INSERT INTO regional_distribution (date, hovedstaden, midtjylland, fyn, sjælland_lf_møn, nordsjælland, nordjylland, sønderjylland, ukendt, grønland, færøerne) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", final)
+        "INSERT INTO regional_distribution (date, hovedstaden, midtjylland, fyn, sjælland_lf_møn, nordsjælland, nordjylland, sønderjylland, ukendt, grønland, færøerne) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", final)
     conn.commit()
 
     cursor.close()
     conn.close()
-
-
-    

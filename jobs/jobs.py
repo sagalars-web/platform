@@ -4,20 +4,23 @@ import random
 from urllib.request import Request, urlopen
 import psycopg2
 import time
-from dotenv.main import load_dotenv
+from dotenv import load_dotenv
 import os
+from pathlib import Path
 
-load_dotenv()
+dotenv_path = Path('saga/saga/vars.env')
+
+load_dotenv(dotenv_path=dotenv_path)
 
 
 def establish_db_connection():
 
     conn = psycopg2.connect(
-        host=os.environ['DB_HOST'],
-        database=os.environ['DB_NAME'],
-        user=os.environ['DB_USER'],
-        password=os.environ['DB_PASS'],
-        port=os.environ['DB_PORT']
+        host=os.getenv('DBHOST'),
+        database=os.getenv('DBNAME'),
+        user=os.getenv('DBUSER'),
+        password=os.getenv('DBPASS'),
+        port=7668
     )
 
     cursor = conn.cursor()
@@ -40,7 +43,7 @@ def schedule_api():
     conn, cursor = establish_db_connection()
 
     headers = {
-        'autopilotapikey': os.environ['AUTO_KEY']
+        'autopilotapikey': os.getenv('AUTOKEY')
     }
 
     bookmark = ''
